@@ -1,0 +1,13 @@
+[package]
+name = "nss-nobody"
+version = "0.0.0"
+authors = ["Mark Farrell <mark.andrew.farrell@gmail.com>"]
+edition = "2018"
+
+[lib]
+name = "nss_nobody"
+crate-type = [ "cdylib" ]
+
+[dependencies]
+libc = "0.2"
+libnss = "0.8.0"
