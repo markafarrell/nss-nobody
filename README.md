@@ -1,4 +1,4 @@
-# nss_example
+# nss-nobody
 
 ## Build
 
