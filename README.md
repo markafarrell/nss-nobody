@@ -26,5 +26,15 @@ curl -sL -o libnss_nobody.so.2 https://github.com/markafarrell/nss-nobody/releas
 install -m 0644 libnss_nobody.so.2 /lib && \
 /sbin/ldconfig -n /lib /usr/lib &&
 rm libnss_nobody.so.2
+sed -i 's/\(passwd:.*\)/\1 nobody/' /etc/nsswitch.conf
 ```
 
+## Test
+
+```bash
+id asdf
+```
+
+```bash
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+``
