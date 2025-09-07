@@ -22,27 +22,21 @@ before:
 # Actually builds the binaries.
 builds:
   - builder: rust
+    binary: libnss_nobody.so
     targets:
       - x86_64-unknown-linux-gnu
-      - x86_64-apple-darwin
-      - x86_64-pc-windows-gnu
       - aarch64-unknown-linux-gnu
-      - aarch64-apple-darwin
 
 # Creates archives for each target.
 archives:
-  - format: tar.gz
+  - format: binary
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
-      {{ .ProjectName }}_
-      {{- title .Os }}_
+      libnss_nobody_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
-      {{- else }}{{ .Arch }}{{ end }}
-    # use zip for windows archives
-    format_overrides:
-      - goos: windows
-        format: zip
+      {{- else }}{{ .Arch }}{{ end }}.so.2
+
 
 # Changelog configuration (will be in the github release).
 changelog:
@@ -59,7 +53,3 @@ release:
     ---
 
     Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
-
-# Enables source archives.
-source:
-  enabled: true
